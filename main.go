@@ -232,16 +232,14 @@ func main() {
 				// Get proxy from file
 				randsource := rand.NewSource(time.Now().UnixNano())
 				randgenerator := rand.New(randsource)
-				firstLoc := randgenerator.Intn(10)
-				secondLoc := randgenerator.Intn(10)
-				candidate1 := ""
-				candidate2 := ""
+				loc := randgenerator.Intn(10)
+				proxy := ""
 
 				dat, err := ioutil.ReadFile("proxies.txt")
 				if err == nil {
 					ascii := string(dat)
 					splt := strings.Split(ascii, "\n")
-					proxy = splt[firstLoc]
+					proxy = splt[loc]
 				}
 				fmt.Println(proxy)
 				
