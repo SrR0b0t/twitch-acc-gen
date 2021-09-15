@@ -147,8 +147,7 @@ func saveAccount(toSave string) {
 func saveToken(toSave string) {
 	content, _ := ioutil.ReadFile("followbot/tokens.txt")
 	c := string(content)
-	c += toSave
-	c += "\n"
+	c += toSave + "\n"
 	ioutil.WriteFile("followbot/tokens.txt", []byte(c), 0064)
 }
 
