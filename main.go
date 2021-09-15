@@ -144,6 +144,14 @@ func saveAccount(toSave string) {
 	ioutil.WriteFile("followbot/accounts.txt", []byte(c), 0064)
 }
 
+func saveToken(toSave string) {
+	content, _ := ioutil.ReadFile("followbot/tokens.txt")
+	c := string(content)
+	c += toSave
+	c += "\n"
+	ioutil.WriteFile("followbot/tokens.txt", []byte(c), 0064)
+}
+
 func setCaptchaBad(capKey int) {
 	client := http.Client{}
 	bd := fmt.Sprintf(`{"access_token": "%v"}`, c.CaptchaKey)
@@ -259,7 +267,8 @@ func main() {
 					fmt.Println("oauth resp err", er)
 				}
 				Oauth := r.OAuth
-				followThatMan(c.TwitchID, Oauth, client)
+				// followThatMan(c.TwitchID, Oauth, client)
+				saveToken(Oauth)
 				saveAccount(fmt.Sprintf("\n=====================\nUsername: %v\nPassword: %v\nEmail: %v\nOAuth: %v\n=====================", username, c.Password, email, Oauth))
 			}(capKeys[i])
 		}
